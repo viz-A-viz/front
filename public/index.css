@@ -1,0 +1,20 @@
+.cardText {
+  overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 5;
+           line-clamp: 5; 
+   -webkit-box-orient: vertical;
+   text-indent: 30px;
+}
+
+.fullCardText {
+        text-indent: 30px;
+}
+
+.navbar-brand {
+        position: absolute;
+        left: 50%;
+        margin-left: -50px !important;  /* 50% of your logo width */
+        display: block;
+    }

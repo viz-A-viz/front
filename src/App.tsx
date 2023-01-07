@@ -1,57 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { useEffect } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import LoginPage from './components/LoginPage';
+import Main from './components/Main';
+import Navigation from './components/Navigation';
+import PostAddForm from './components/PostAddForm';
+import PostEditForm from './components/PostEditForm';
+import { useAppDispatch, useAppSelector } from './store/hooks';
+import { getUser } from './store/actionCreators/usersActions';
 
 function App() {
+  const user = useAppSelector((state) => state.user.user);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getUser());
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+    <BrowserRouter>
+      {user && <Navigation />}
+      <Routes>
+        <Route path="/" element={user ? <Main /> : <LoginPage />} />
+        <Route path="/add" element={user ? <PostAddForm /> : <LoginPage />} />
+        <Route path="/edit" element={user ? <PostEditForm /> : <LoginPage />} />
+        <Route path="/login" element={<LoginPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
