@@ -2,7 +2,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import type { PostType } from '../../types/Post';
 
-const API = 'https://solo-project-blog-back.onrender.com';
+const API = '/api';
+// const API = 'https://solo-project-blog-back.onrender.com';
 // const API = 'http://localhost:8080';
 
 export const fetchPosts = createAsyncThunk('posts/fetchAll', async () => {
