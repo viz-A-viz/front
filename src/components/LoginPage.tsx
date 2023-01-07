@@ -8,6 +8,7 @@ import {
   logIn,
   registerUser,
 } from '../store/actionCreators/usersActions';
+import Spinner from './Spinner/Spinner';
 
 export default function LoginPage() {
   const [registering, setRegistering] = useState(false);
@@ -21,7 +22,7 @@ export default function LoginPage() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const user = useAppSelector((state) => state.user.user);
+  const { user, userIsLoading } = useAppSelector((state) => state.user);
   if (user) navigate('/');
 
   const handleSubmitLogIn = async () => {
@@ -51,6 +52,7 @@ export default function LoginPage() {
     dispatch(getUser());
   };
 
+  if (userIsLoading) return <Spinner speed={1} customText="Loading..." />;
   return (
     <Container>
       <Form>

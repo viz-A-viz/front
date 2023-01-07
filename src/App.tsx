@@ -10,12 +10,15 @@ import { useAppDispatch, useAppSelector } from './store/hooks';
 import { getUser } from './store/actionCreators/usersActions';
 
 function App() {
-  const user = useAppSelector((state) => state.user.user);
+  const { user, userIsLoading } = useAppSelector((state) => state.user);
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getUser());
+    const main = async () => {
+      await dispatch(getUser());
+    };
+    main();
   }, []);
 
   return (
