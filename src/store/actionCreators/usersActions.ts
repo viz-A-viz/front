@@ -2,8 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { UserType } from '../../types/User';
 
-// const API = '/api';
-const API = 'https://solo-project-blog-back.onrender.com';
+const API = '/api';
 
 export const logIn = createAsyncThunk(
   'user/logIn',
