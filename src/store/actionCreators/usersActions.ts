@@ -2,8 +2,10 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { UserType } from '../../types/User';
 
+const API = 'https://solo-project-blog-back.onrender.com';
+
 export const logIn = createAsyncThunk(
-  'logIn',
+  'user/logIn',
   async (user: { username: string; password: string }, thunkAPI) => {
     const { username, password } = user;
 
@@ -12,7 +14,7 @@ export const logIn = createAsyncThunk(
     formData.append('password', password);
 
     try {
-      const response = await axios.post<string>('/auth/login', formData);
+      const response = await axios.post<string>(`${API}/auth/login`, formData);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -21,7 +23,7 @@ export const logIn = createAsyncThunk(
 );
 
 export const getUser = createAsyncThunk('user/getUser', async () => {
-  const response = await axios.get<UserType | undefined>('/auth/user');
+  const response = await axios.get<UserType | undefined>(`${API}/auth/user`);
   return response.data;
 });
 
@@ -38,7 +40,7 @@ export const registerUser = createAsyncThunk(
     thunkAPI
   ) => {
     try {
-      const response = await axios.post<string>('/auth/register', user);
+      const response = await axios.post<string>(`${API}/auth/register`, user);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
