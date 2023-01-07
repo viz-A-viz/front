@@ -28,7 +28,7 @@ export default function Posts() {
     if (user) {
       const { id } = user;
       if (onlyMyPosts) postsOnPage = posts.filter((post) => post.userId === id);
-      if (showPost) postsOnPage = posts.filter((post) => post.id === showPost);
+      if (showPost) return posts.filter((post) => post.id === showPost);
     }
     return postsOnPage.slice(pageSize - 10, pageSize);
   }, [posts, onlyMyPosts, showPost, page]);

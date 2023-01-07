@@ -2,7 +2,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import type { PostType } from '../../types/Post';
 
-const API = '/api';
+// const API = '/api';
+const API = 'http://localhost:8080';
 
 export const fetchPosts = createAsyncThunk('posts/fetchAll', async () => {
   const response = await axios.get<PostType[]>(`${API}/posts`, {

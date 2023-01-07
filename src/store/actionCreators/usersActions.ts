@@ -2,7 +2,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { UserType } from '../../types/User';
 
-const API = '/api';
+// const API = '/api';
+const API = 'http://localhost:8080';
 
 export const logIn = createAsyncThunk(
   'user/logIn',

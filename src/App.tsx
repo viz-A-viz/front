@@ -15,10 +15,7 @@ function App() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const main = async () => {
-      await dispatch(getUser());
-    };
-    main();
+    dispatch(getUser());
   }, []);
 
   return (
