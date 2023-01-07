@@ -3,6 +3,7 @@ import axios from 'axios';
 import { UserType } from '../../types/User';
 
 const API = 'https://solo-project-blog-back.onrender.com';
+// const API = 'http://localhost:8080';
 
 export const logIn = createAsyncThunk(
   'user/logIn',
@@ -14,7 +15,9 @@ export const logIn = createAsyncThunk(
     formData.append('password', password);
 
     try {
-      const response = await axios.post<string>(`${API}/auth/login`, formData);
+      const response = await axios.post<string>(`${API}/auth/login`, formData, {
+        withCredentials: true,
+      });
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -23,7 +26,9 @@ export const logIn = createAsyncThunk(
 );
 
 export const getUser = createAsyncThunk('user/getUser', async () => {
-  const response = await axios.get<UserType | undefined>(`${API}/auth/user`);
+  const response = await axios.get<UserType | undefined>(`${API}/auth/user`, {
+    withCredentials: true,
+  });
   return response.data;
 });
 
@@ -40,7 +45,9 @@ export const registerUser = createAsyncThunk(
     thunkAPI
   ) => {
     try {
-      const response = await axios.post<string>(`${API}/auth/register`, user);
+      const response = await axios.post<string>(`${API}/auth/register`, user, {
+        withCredentials: true,
+      });
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

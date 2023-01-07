@@ -75,6 +75,5 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "prettier": "^2.8.1",
     "typescript": "^4.9.4"
-  },
-  "proxy": "https://solo-project-blog-back.onrender.com"
+  }
 }

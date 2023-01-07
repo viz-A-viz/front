@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { addPost } from '../store/actionCreators/postsActions';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { showAllPosts } from '../store/reducers/postsSlice';
 
@@ -14,7 +15,7 @@ export default function PostAddForm() {
 
   const handleSubmit = async () => {
     if (user) {
-      await axios.post('/posts', { title, text, userId: user.id });
+      await dispatch(addPost({ title, text, userId: user.id }));
       dispatch(showAllPosts());
       navigate('/');
     }
