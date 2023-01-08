@@ -14,7 +14,9 @@ export const fetchPosts = createAsyncThunk('posts/fetchAll', async () => {
 export const editPost = createAsyncThunk(
   'posts/editPost',
   async (data: { titleEdit: string; textEdit: string; idEdit: number }) => {
-    const response = await axios.post<string>('/posts/edit', data);
+    const response = await axios.post<string>(`${API}/posts/edit`, data, {
+      withCredentials: true,
+    });
     return response.data;
   }
 );
