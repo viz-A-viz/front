@@ -1,7 +1,7 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 import { useLocation, useNavigate, useNavigation } from 'react-router-dom';
+import { editPost } from '../store/actionCreators/postsActions';
 import { useAppDispatch } from '../store/hooks';
 import { showAllPosts } from '../store/reducers/postsSlice';
 import { PostType } from '../types/Post';
@@ -26,7 +26,7 @@ export default function PostEditForm() {
   const dispatch = useAppDispatch();
 
   const handleSubmit = async () => {
-    await axios.post('/posts/edit', { idEdit, titleEdit, textEdit });
+    await dispatch(editPost({ idEdit, titleEdit, textEdit }));
     dispatch(showAllPosts());
     navigate('/');
   };

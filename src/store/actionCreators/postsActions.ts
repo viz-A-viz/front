@@ -11,6 +11,14 @@ export const fetchPosts = createAsyncThunk('posts/fetchAll', async () => {
   return response.data;
 });
 
+export const editPost = createAsyncThunk(
+  'posts/editPost',
+  async (data: { titleEdit: string; textEdit: string; idEdit: number }) => {
+    const response = await axios.post<string>('/posts/edit', data);
+    return response.data;
+  }
+);
+
 export const addPost = createAsyncThunk(
   'posts/add',
   async (data: { title: string; text: string; userId: number }) => {
