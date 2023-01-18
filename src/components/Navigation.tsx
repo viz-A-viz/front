@@ -7,6 +7,14 @@ export default function Navigation() {
     <Navbar expand="lg" className="my-4">
       <Container>
         <Navbar.Brand href="/">Just a blog</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link href="/" onClick={() => localStorage.clear()}>
+              Logout
+            </Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
       </Container>
     </Navbar>
   );

@@ -1,22 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import $api from '../../http/index';
 import { UserType } from '../../types/User';
-
-const API = '/api';
 
 export const logIn = createAsyncThunk(
   'user/logIn',
-  async (user: { username: string; password: string }, thunkAPI) => {
-    const { username, password } = user;
-
-    const formData = new FormData();
-    formData.append('username', username);
-    formData.append('password', password);
-
+  async (user: { email: string; password: string }, thunkAPI) => {
     try {
-      const response = await axios.post<string>(`${API}/auth/login`, formData, {
-        withCredentials: true,
-      });
+      const response = await $api.post<UserType>(`/auth/login`, user);
+      localStorage.setItem('token', response.data.token);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -25,9 +16,7 @@ export const logIn = createAsyncThunk(
 );
 
 export const getUser = createAsyncThunk('user/getUser', async () => {
-  const response = await axios.get<UserType | undefined>(`${API}/auth/user`, {
-    withCredentials: true,
-  });
+  const response = await $api.get<UserType | undefined>(`/auth/user`);
   return response.data;
 });
 
@@ -44,9 +33,8 @@ export const registerUser = createAsyncThunk(
     thunkAPI
   ) => {
     try {
-      const response = await axios.post<string>(`${API}/auth/register`, user, {
-        withCredentials: true,
-      });
+      const response = await $api.post<UserType>(`/auth/register`, user);
+      localStorage.setItem('token', response.data.token);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error);

@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from './store/hooks';
 import { getUser } from './store/actionCreators/usersActions';
 
 function App() {
-  const { user, userIsLoading } = useAppSelector((state) => state.user);
+  const { user } = useAppSelector((state) => state.user);
 
   const dispatch = useAppDispatch();
 

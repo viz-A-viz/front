@@ -9,6 +9,7 @@ import {
   registerUser,
 } from '../store/actionCreators/usersActions';
 import Spinner from './Spinner/Spinner';
+import { AxiosResponseData } from '../types/AxiosResponseData';
 
 export default function LoginPage() {
   const [registering, setRegistering] = useState(false);
@@ -26,11 +27,12 @@ export default function LoginPage() {
   if (user) navigate('/');
 
   const handleSubmitLogIn = async () => {
-    const userLogIn = { username, password };
+    const userLogIn = { email, password };
     const x = await dispatch(logIn(userLogIn));
 
     if (x.payload instanceof AxiosError && x.payload.response) {
-      const mess = x.payload.response.data as string;
+      const data = x.payload.response.data as AxiosResponseData;
+      const mess = data.message;
       setMessage(mess);
     }
     dispatch(getUser());
@@ -41,14 +43,10 @@ export default function LoginPage() {
     const newUser = await dispatch(registerUser(userRegister));
 
     if (newUser.payload instanceof AxiosError && newUser.payload.response) {
-      const mess = newUser.payload.response.data as string;
+      const data = newUser.payload.response.data as AxiosResponseData;
+      const mess = data.message;
       setMessage(mess);
-
-      if (mess.includes('username'))
-        setMessage('This username already registered');
-
-      if (mess.includes('email')) setMessage('This email already registered');
-    } else await dispatch(logIn({ username, password }));
+    }
     dispatch(getUser());
   };
 
@@ -56,20 +54,20 @@ export default function LoginPage() {
   return (
     <Container>
       <Form>
-        <Form.Group className="mb-3" controlId="username">
-          <Form.Label>Username</Form.Label>
+        <Form.Group className="mb-3" controlId="email">
+          <Form.Label>Email</Form.Label>
           <Form.Control
-            type="text"
-            onChange={(e) => setUsername(e.target.value)}
+            type="email"
+            onChange={(e) => setEmail(e.target.value)}
           />
         </Form.Group>
         {registering && (
           <>
-            <Form.Group className="mb-3" controlId="email">
-              <Form.Label>Email</Form.Label>
+            <Form.Group className="mb-3" controlId="username">
+              <Form.Label>Username</Form.Label>
               <Form.Control
-                type="email"
-                onChange={(e) => setEmail(e.target.value)}
+                type="text"
+                onChange={(e) => setUsername(e.target.value)}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="firstName">
