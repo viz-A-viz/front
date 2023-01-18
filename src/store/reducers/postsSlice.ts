@@ -56,7 +56,7 @@ export const postsSlice = createSlice({
       state.posts.push(action.payload);
     });
     builder.addCase(deletePost.fulfilled, (state, action) => {
-      _.remove(state.posts, (post) => post.id === action.payload);
+      _.remove(state.posts, (post) => post.id === action.payload.id);
     });
   },
 });

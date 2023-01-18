@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { useState } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
@@ -15,7 +14,7 @@ export default function PostAddForm() {
 
   const handleSubmit = async () => {
     if (user) {
-      await dispatch(addPost({ title, text, userId: user.id }));
+      await dispatch(addPost({ title, text }));
       dispatch(showAllPosts());
       navigate('/');
     }
