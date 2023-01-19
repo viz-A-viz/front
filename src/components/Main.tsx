@@ -4,10 +4,10 @@ import Stack from 'react-bootstrap/Stack';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
-import Posts from './Posts';
-import Sort from './Sort';
 import { useAppSelector } from '../store/hooks';
 import MyPagination from './MyPagination';
+import Posts from './Posts';
+import Sort from './Sort';
 
 export default function Main() {
   const navigate = useNavigate();

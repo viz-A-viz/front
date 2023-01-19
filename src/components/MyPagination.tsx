@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable class-methods-use-this */
-import { Component, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Pagination from 'react-bootstrap/Pagination';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { setPage } from '../store/reducers/postsSlice';

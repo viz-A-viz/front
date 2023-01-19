@@ -2,14 +2,14 @@ import { AxiosError } from 'axios';
 import { useState } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../store/hooks';
 import {
   getUser,
   logIn,
   registerUser,
 } from '../store/actionCreators/usersActions';
-import Spinner from './Spinner/Spinner';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { AxiosResponseData } from '../types/AxiosResponseData';
+import Spinner from './Spinner/Spinner';
 
 export default function LoginPage() {
   const [registering, setRegistering] = useState(false);

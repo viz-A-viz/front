@@ -6,8 +6,8 @@ import Main from './components/Main';
 import Navigation from './components/Navigation';
 import PostAddForm from './components/PostAddForm';
 import PostEditForm from './components/PostEditForm';
-import { useAppDispatch, useAppSelector } from './store/hooks';
 import { getUser } from './store/actionCreators/usersActions';
+import { useAppDispatch, useAppSelector } from './store/hooks';
 
 function App() {
   const { user } = useAppSelector((state) => state.user);
@@ -22,10 +22,18 @@ function App() {
     <BrowserRouter>
       {user && <Navigation />}
       <Routes>
-        <Route path="/" element={user ? <Main /> : <LoginPage />} />
-        <Route path="/add" element={user ? <PostAddForm /> : <LoginPage />} />
-        <Route path="/edit" element={user ? <PostEditForm /> : <LoginPage />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route key={1} path="/" element={user ? <Main /> : <LoginPage />} />
+        <Route
+          key={2}
+          path="/add"
+          element={user ? <PostAddForm /> : <LoginPage />}
+        />
+        <Route
+          key={3}
+          path="/edit"
+          element={user ? <PostEditForm /> : <LoginPage />}
+        />
+        <Route key={4} path="/login" element={<LoginPage />} />
       </Routes>
     </BrowserRouter>
   );

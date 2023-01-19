@@ -1,10 +1,10 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useLayoutEffect, useMemo } from 'react';
 
 import { Button } from 'react-bootstrap';
 import Post from './Post';
 
-import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { fetchPosts } from '../store/actionCreators/postsActions';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { showAllPosts, sortPosts } from '../store/reducers/postsSlice';
 
 export default function Posts() {
@@ -33,14 +33,21 @@ export default function Posts() {
     return postsOnPage.slice(pageSize - 10, pageSize);
   }, [posts, onlyMyPosts, showPost, page]);
 
+  const { scrollX } = window;
+  const { scrollY } = window;
+
+  useLayoutEffect(() => {
+    window.scrollTo(scrollX, scrollY);
+  });
+
   return (
     <>
-      {displayPosts.map((post) => (
-        <Post key={post.id} post={post} />
-      ))}
       {showPost > 0 && (
         <Button onClick={() => dispatch(showAllPosts())}>Show all posts</Button>
       )}
+      {displayPosts.map((post) => (
+        <Post key={post.id} post={post} />
+      ))}
     </>
   );
 }
