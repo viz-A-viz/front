@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-// export const API_URL = '/api';
-export const API_URL = 'http://localhost:8080';
+export const API_URL = '/api';
+// export const API_URL = 'http://localhost:8080';
 // export const API_URL = 'https://solo-project-blog-back-nestjs.onrender.com';
 
 const $api = axios.create({
